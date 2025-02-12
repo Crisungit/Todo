@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>To Do</title>
+		<link
+			rel="stylesheet"
+			href="ToDo.css" />
+	</head>
+	<body>
+		<h1>To Do</h1>
+		<button id="show-form">Add task</button>
+		<div class="form-container">
+			<form id="task-form">
+				<label for="add-text">Add task</label>
+				<input
+					type="text"
+					id="add-text"
+					name="task"
+					placeholder="Enter task here." />
+				<br />
+				<label for="importance-slider">Importance</label>
+				<input
+					type="range"
+					id="importance-slider"
+					name="importance-slider"
+					min="0"
+					max="10" />
+				<br />
+				<br />
+				<button
+					id="add-button"
+					type="submit">
+					Add
+				</button>
+			</form>
+		</div>
+
+		<div class="show-tasks">
+			<h1>All tasks</h1>
+			<table id="show-textarea">
+				<tbody id="table-body"></tbody>
+			</table>
+			<button id="remove-button">Remove</button>
+		</div>
+
+		<script src="ToDo.js"></script>
+	</body>
+</html>
