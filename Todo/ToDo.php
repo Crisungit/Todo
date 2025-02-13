@@ -31,5 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'tasks' => $tasks,
             'message' => 'Task removed.']);
     }
+} elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
+    $file = 'tasks.json';
+    $tasks = [];
+    if (file_exists($file)) {
+        $data = file_get_contents($file);
+        $tasks = json_decode($data, true);
+    }
+        echo json_encode([
+            'tasks' => $tasks,
+            'message' => 'All tasks fetched']);
 }
 ?>

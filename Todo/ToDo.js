@@ -14,6 +14,22 @@ showFormButton.addEventListener("click", () => {
 
 removeButton.addEventListener("click", DeleteTask);
 
+window.onload = function () {
+	fetch("ToDo.php", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((response) => response.json())
+		.then((data) => {
+			Table(data);
+		})
+		.catch((error) => {
+			console.error("There was a problem with the get fetch", error);
+		});
+};
+
 taskForm.addEventListener("submit", (e) => {
 	e.preventDefault();
 	const task = document.getElementById("add-text").value;
