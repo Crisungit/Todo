@@ -14,6 +14,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($input['add'])) {
         $taskData = $input['add'];
         $tasks[] = $taskData;
+        function my_sort($a, $b) {
+            if ($a["importance"] == $b["importance"]) return 0;
+            return ($a["importance"] > $b["importance"]) ? -1 : 1;
+          }
+        usort($tasks, "my_sort");
         //Save updated data back to file
         file_put_contents($file, json_encode($tasks, JSON_PRETTY_PRINT));
         //Returns data
@@ -34,6 +39,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } elseif($_SERVER['REQUEST_METHOD'] === 'GET'){
     $file = 'tasks.json';
     $tasks = [];
+    function my_sort($a, $b) {
+        if ($a["importance"] == $b["importance"]) return 0;
+        return ($a["importance"] > $b["importance"]) ? -1 : 1;
+      }
+    usort($tasks, "my_sort");
     if (file_exists($file)) {
         $data = file_get_contents($file);
         $tasks = json_decode($data, true);

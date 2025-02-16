@@ -14,20 +14,14 @@ showFormButton.addEventListener("click", () => {
 
 removeButton.addEventListener("click", DeleteTask);
 
-window.onload = function () {
-	fetch("ToDo.php", {
-		method: "GET",
-		headers: {
-			"Content-Type": "application/json",
-		},
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			Table(data);
-		})
-		.catch((error) => {
-			console.error("There was a problem with the get fetch", error);
-		});
+window.onload = async function () {
+	try {
+		const response = await fetch("ToDo.php");
+		const responseData = await response.json();
+		Table(responseData);
+	} catch (error) {
+		console.log("Getting the dosn't work", error);
+	}
 };
 
 taskForm.addEventListener("submit", (e) => {
@@ -93,19 +87,18 @@ function Table(data) {
 	taskArea.innerHTML = rows;
 }
 
-function GetData(actionKey, data) {
-	fetch("ToDo.php", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({ [actionKey]: data }),
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			Table(data);
-		})
-		.catch((error) => {
-			console.log("There was a problem with the post fetch", error);
+async function GetData(actionKey, data) {
+	try {
+		const response = await fetch("ToDo.php", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ [actionKey]: data }),
 		});
+		const responseData = await response.json();
+		Table(responseData);
+	} catch (error) {
+		console.log("Datan postaus ei toiminut", error);
+	}
 }
